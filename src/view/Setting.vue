@@ -48,6 +48,17 @@
             </h2>
           </label>
         </div>
+
+        <!-- 调试模式 -->
+        <div
+          class="flex flex-row justify-between items-center border-t border-[var(--td-border-level-1-color)] border-dashed pt-4 mb-6"
+        >
+          <h2 class="text-lg font-medium">调试模式</h2>
+          <t-radio-group v-model="game.isDebugMode">
+            <t-radio :value="true">开</t-radio>
+            <t-radio :value="false">关</t-radio>
+          </t-radio-group>
+        </div>
       </div>
     </div>
     <!-- 开始游戏 -->
@@ -110,9 +121,10 @@ import {
 } from "tdesign-icons-vue-next";
 import { computed, ref } from "vue";
 import { useGameStore } from "../stores/game";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
+const route = useRoute();
 const game = useGameStore();
 
 const settingModalId = "setting-modal";
@@ -146,7 +158,7 @@ const handleStartGame = async () => {
     game.undercoverWord = words[randomIndex][1];
   }
   game.isStartGame = true;
-  router.push({ name: "game" });
+  router.push({ name: "game", query: route.query });
 };
 </script>
 

@@ -49,6 +49,11 @@ export const useGameStore = defineStore("game", {
        * @type {boolean}
        */
       isCustomWordMode: false,
+      /**
+       * 是否调试模式
+       * @type {boolean}
+       */
+      isDebugMode: false,
     };
   },
   actions: {
@@ -64,6 +69,7 @@ export const useGameStore = defineStore("game", {
       this.isLoadedWordList = false;
       this.isStartGame = false;
       this.isCustomWordMode = false;
+      this.isDebugMode = false;
     },
   },
 });

@@ -10,7 +10,10 @@
         />
       </div>
       <div class="w-full mt-8 text-center">
-        <router-link :to="{ name: 'setting' }" class="game-btn mx-auto">
+        <router-link
+          :to="{ name: 'setting', query: route.query }"
+          class="game-btn mx-auto"
+        >
           创建游戏
         </router-link>
       </div>
@@ -19,7 +22,10 @@
 </template>
 
 <script lang="ts" setup>
+import { useRoute } from "vue-router";
 import Header from "../components/Header.vue";
+
+const route = useRoute();
 </script>
 
 <style scoped></style>

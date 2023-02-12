@@ -12,8 +12,11 @@
     <div v-if="gameWords.length" class="flex flex-row flex-wrap w-full my-6">
       <div
         v-for="(item, index) in gameWords"
-        class="w-1/2 p-3 cursor-pointer relative"
         :key="`${index}-${item.word}`"
+        class="w-1/2 p-3 cursor-pointer relative"
+        :class="{
+          'opacity-50': item.isViewed,
+        }"
         @click="showCardModal(item, index)"
       >
         <div
@@ -26,7 +29,7 @@
               {{ index + 1 }} 号
             </div>
             <!-- 调试专用 -->
-            <div class="text-lg mt-2">
+            <div v-if="game.isDebugMode" class="text-lg mt-2">
               {{ item.isSpy ? (item.isBlank ? "白板" : "卧底") : "平民" }}
             </div>
           </div>
@@ -69,12 +72,13 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, Ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useGameStore } from "../stores/game";
 import { randomNumber } from "../utils";
 import face from "../assets/data/face.json";
 
 const router = useRouter();
+const route = useRoute();
 const game = useGameStore();
 
 const gameModalRef = ref<HTMLElement | null>(null);
@@ -84,17 +88,21 @@ interface GameWord {
   word: string;
   isSpy: boolean;
   isBlank: boolean;
+  isViewed: boolean;
 }
 const gameWords: Ref<GameWord[]> = ref([]);
 const spyIndexList: Ref<number[]> = ref([]);
 
 const cardModalTitle = ref("");
 const cardModalText = ref("");
+
 const showCardModal = (item: GameWord, index) => {
+  if (item.isViewed) return;
   cardModalTitle.value = index + 1 + "号";
   cardModalText.value = item.word;
   if (gameModalRef.value) {
     gameModalRef.value.checked = true;
+    item.isViewed = true;
   }
 };
 
@@ -110,10 +118,10 @@ const init = () => {
       spyIndexList.value.push(randomIndex);
     }
   }
+  const blankRandomIndex = randomNumber(game.undercoverCount);
 
   for (let i = 0; i < game.totalPlayerCount; i++) {
     const isSpy = spyIndexList.value.includes(i);
-    const blankRandomIndex = randomNumber(game.undercoverCount);
     const isBlank =
       game.hasBlankPlayer && i === spyIndexList.value[blankRandomIndex];
     const word = isSpy ? game.undercoverWord : game.civilianWord;
@@ -121,13 +129,19 @@ const init = () => {
       word: isBlank ? "" : word,
       isSpy,
       isBlank,
+      isViewed: false,
     });
   }
+  console.log("卧底", [...spyIndexList.value]);
+  console.log(
+    "白板",
+    game.hasBlankPlayer ? [spyIndexList.value[blankRandomIndex]] : null
+  );
 };
 
 onMounted(() => {
   if (!game.isStartGame) {
-    router.push({ name: "setting" });
+    router.push({ name: "setting", query: route.query });
   }
   init();
 });
