@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.has-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  background: transparent;
+}
+
+.has-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.has-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:root {
+  --theme-yellow: rgb(255, 202, 50);
+  --theme-gray: rgb(182, 182, 182);
+  --bg-black: rgb(51, 51, 51);
+  --bg-gray: rgb(203, 203, 203);
+}
+
+#app,
+.Main {
+  background-image: url("https://staticoss.xhemj.work/spy.xhemj.com/bg.jpg");
+  @apply relative min-h-screen bg-center bg-repeat bg-contain z-10;
+}
+
+#app::after {
+  content: "";
+  @apply pointer-events-none absolute top-0 left-0 right-0 bottom-0 z-0 bg-black/20;
+}
+
+#app,
+.Main {
+  @apply absolute left-0 right-0 top-0 bottom-0 w-full min-h-screen px-4 py-6 mx-auto my-0 max-w-[425px] overflow-y-auto;
+}
+
+/* 图片资源预加载 */
+#app::after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url("https://staticoss.xhemj.work/spy.xhemj.com/card.png")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/banner.png")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/logo.png")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/text-setting.png");
+}
+
+/* .modal {
+  position: absolute;
+} */
+
+.game-btn {
+  background-color: var(--theme-yellow);
+  @apply block px-6 py-2 text-lg font-bold rounded-3xl border-[3px] border-solid border-gray-700 shadow-md max-w-[250px] cursor-pointer;
+}
+
+.game-btn.game-btn-small {
+  @apply max-w-[200px];
+}
+
+.game-btn.disabled {
+  background-color: var(--theme-gray);
+  @apply cursor-not-allowed border-[var(--theme-gray)];
+}
