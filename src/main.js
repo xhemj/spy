@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+// import { vLongpress } from "@nanogiants/vue3-longpress";
 import { router } from "./router";
 // import { i18n, loadLanguageAsync } from "./i18n";
 import "./style.css";
@@ -23,4 +24,6 @@ const app = createApp(App);
 app.use(router);
 // app.use(i18n);
 app.use(pinia);
+// app.directive("use-longpress", vLongpress);
+
 app.mount("#app");

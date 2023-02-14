@@ -19,13 +19,22 @@
         <!-- 游戏人数 -->
         <div class="flex flex-row justify-between items-center mb-6">
           <h2 class="text-lg font-medium">游戏人数</h2>
-          <t-input-number :step="1" :min="3" v-model="game.totalPlayerCount" />
+          <t-input-number
+            :step="1"
+            :min="minTotalPlayerCount"
+            v-model="game.totalPlayerCount"
+          />
         </div>
 
         <!-- 卧底人数 -->
         <div class="flex flex-row justify-between items-center mb-6">
           <h2 class="text-lg font-medium">卧底人数</h2>
-          <t-input-number :step="1" :min="1" v-model="game.undercoverCount" />
+          <t-input-number
+            :step="1"
+            :min="1"
+            :max="maxUndercoverCount"
+            v-model="game.undercoverCount"
+          />
         </div>
 
         <!-- 白板玩家 -->
@@ -51,7 +60,7 @@
 
         <!-- 调试模式 -->
         <div
-          class="flex flex-row justify-between items-center border-t border-[var(--td-border-level-1-color)] border-dashed pt-4 mb-6"
+          class="flex flex-row justify-between items-center border-t border-[var(--td-border-level-1-color)] border-dashed pt-6 mb-6"
         >
           <h2 class="text-lg font-medium">调试模式</h2>
           <t-radio-group v-model="game.isDebugMode">
@@ -128,10 +137,18 @@ const route = useRoute();
 const game = useGameStore();
 
 const settingModalId = "setting-modal";
-const modalRef = ref(null);
+const modalRef = ref<HTMLInputElement | null>(null);
 
 const customCivilianWord = ref("");
 const customUndercoverWord = ref("");
+
+const minTotalPlayerCount = computed(() => {
+  return game.undercoverCount + 1;
+});
+
+const maxUndercoverCount = computed(() => {
+  return game.totalPlayerCount - 1;
+});
 
 const isSetCustomWords = computed(() => {
   return customCivilianWord.value && customUndercoverWord.value;
@@ -204,7 +221,7 @@ const handleStartGame = async () => {
 }
 
 :deep(.t-radio__input) {
-  border-color: var(--bg-black);
+  border-color: var(--bg-black) !important;
   @apply border-2 border-solid rounded-full;
 }
 
@@ -215,7 +232,7 @@ const handleStartGame = async () => {
 }
 
 :deep(.t-radio.t-is-checked .t-radio__input) {
-  border-color: var(--bg-black);
+  border-color: var(--bg-black) !important;
 }
 
 :deep(.t-radio__input::after) {

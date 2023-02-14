@@ -19,6 +19,7 @@
 :root {
   --theme-yellow: rgb(255, 202, 50);
   --theme-gray: rgb(182, 182, 182);
+  --theme-blue: rgb(100, 141, 255);
   --bg-black: rgb(51, 51, 51);
   --bg-gray: rgb(203, 203, 203);
 }
@@ -29,10 +30,10 @@
   @apply relative min-h-screen bg-center bg-repeat bg-contain z-10;
 }
 
-#app::after {
+/* #app::after {
   content: "";
   @apply pointer-events-none absolute top-0 left-0 right-0 bottom-0 z-0 bg-black/20;
-}
+} */
 
 #app,
 .Main {
@@ -46,10 +47,15 @@
   height: 0;
   overflow: hidden;
   z-index: -1;
-  content: url("https://staticoss.xhemj.work/spy.xhemj.com/card.png")
-    url("https://staticoss.xhemj.work/spy.xhemj.com/banner.png")
+  content: url("https://staticoss.xhemj.work/spy.xhemj.com/banner.png ")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/bg.jpg ")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/card-eliminated.png")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/card-viewed.png")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/card.png")
     url("https://staticoss.xhemj.work/spy.xhemj.com/logo.png")
-    url("https://staticoss.xhemj.work/spy.xhemj.com/text-setting.png");
+    url("https://staticoss.xhemj.work/spy.xhemj.com/text-bg.png")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/text-setting.png")
+    url("https://staticoss.xhemj.work/spy.xhemj.com/win-bg.png");
 }
 
 /* .modal {
@@ -66,6 +72,38 @@
 }
 
 .game-btn.disabled {
-  background-color: var(--theme-gray);
-  @apply cursor-not-allowed border-[var(--theme-gray)];
+  background-color: var(--theme-gray) !important;
+  @apply !cursor-not-allowed !border-[var(--theme-gray)];
+}
+
+.stroke {
+  color: var(--font-color);
+  letter-spacing: 0;
+  font-weight: 700;
+  text-shadow: var(--stroke-color) 4px 0 0,
+    var(--stroke-color) 3.87565px 0.989616px 0,
+    var(--stroke-color) 3.51033px 1.9177px 0,
+    var(--stroke-color) 2.92676px 2.72656px 0,
+    var(--stroke-color) 2.16121px 3.36588px 0,
+    var(--stroke-color) 1.26129px 3.79594px 0,
+    var(--stroke-color) 0.282949px 3.98998px 0,
+    var(--stroke-color) -0.712984px 3.93594px 0,
+    var(--stroke-color) -1.66459px 3.63719px 0,
+    var(--stroke-color) -2.51269px 3.11229px 0,
+    var(--stroke-color) -3.20457px 2.39389px 0,
+    var(--stroke-color) -3.69721px 1.52664px 0,
+    var(--stroke-color) -3.95997px 0.56448px 0,
+    var(--stroke-color) -3.97652px -0.432781px 0,
+    var(--stroke-color) -3.74583px -1.40313px 0,
+    var(--stroke-color) -3.28224px -2.28625px 0,
+    var(--stroke-color) -2.61457px -3.02721px 0,
+    var(--stroke-color) -1.78435px -3.57996px 0,
+    var(--stroke-color) -0.843183px -3.91012px 0,
+    var(--stroke-color) 0.150409px -3.99717px 0,
+    var(--stroke-color) 1.13465px -3.8357px 0,
+    var(--stroke-color) 2.04834px -3.43574px 0,
+    var(--stroke-color) 2.83468px -2.82216px 0,
+    var(--stroke-color) 3.44477px -2.03312px 0,
+    var(--stroke-color) 3.84068px -1.11766px 0,
+    var(--stroke-color) 3.9978px -0.132717px 0;
 }

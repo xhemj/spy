@@ -28,11 +28,13 @@ router.beforeEach((to, from) => {
 
 onMounted(() => {
   game.reset();
-  // 预请求 face 中的图片
-  face.forEach((item) => {
-    const img = new Image();
-    img.src = item;
-  });
+  setTimeout(() => {
+    // 预请求 face 中的图片
+    face.forEach((item) => {
+      const img = new Image();
+      img.src = item;
+    });
+  }, 1);
 });
 </script>
 
@@ -42,7 +44,6 @@ onMounted(() => {
 .slide-left-leave-active,
 .slide-right-leave-active {
   position: absolute !important;
-  background-color: white;
   top: 0;
   bottom: 0;
   left: 0;
@@ -81,8 +82,13 @@ onMounted(() => {
   transform: translateX(50%);
 }
 
-/* .slide-left-leave-to,
-.slide-right-leave-to {
-  opacity: 0.3;
-} */
+.Main::after {
+  content: "";
+  @apply pointer-events-none opacity-0 absolute top-0 left-0 right-0 bottom-0 z-0 bg-black/40 transition-opacity duration-150;
+}
+
+.Main.slide-left-leave-to::after,
+.Main.slide-right-leave-to::after {
+  @apply opacity-100;
+}
 </style>
