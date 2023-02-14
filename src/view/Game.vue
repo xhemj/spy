@@ -35,7 +35,7 @@
               eliminate(item, index);
             }
           },
-          { delay: 250 },
+          { delay: 500 },
         ]"
       >
         <div
@@ -47,7 +47,7 @@
             class="absolute text-4xl font-bold text-white w-full text-center"
           >
             <div
-              class="words-text stroke select-none font-sans w-[1em] mx-auto"
+              class="stroke-text stroke select-none font-sans w-[1em] mx-auto"
             >
               {{ index + 1 }} 号
             </div>
@@ -139,7 +139,7 @@ import { computed, onMounted, ref, Ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { vOnLongPress } from "@vueuse/components";
 import { useGameStore } from "../stores/game";
-import { randomNumber } from "../utils";
+import { randomNumber, GameWord } from "../utils";
 import face from "../assets/data/face.json";
 
 const router = useRouter();
@@ -148,15 +148,6 @@ const game = useGameStore();
 
 const gameModalRef = ref<HTMLInputElement | null>(null);
 const gameModalId = "game-modal";
-
-interface GameWord {
-  word: string;
-  isSpy: boolean;
-  isBlank: boolean;
-  isViewed: boolean;
-  isReviewed: boolean;
-  isEliminated: boolean;
-}
 
 const gameWords: Ref<GameWord[]> = ref([]);
 const spyIndexList: Ref<number[]> = ref([]);
@@ -203,12 +194,25 @@ const eliminate = (item: GameWord, index: number) => {
       unEliminatedCivilianIndexList.value.filter((i) => i !== index);
   }
   item.isEliminated = true;
-  if (unEliminatedSpyIndexList.value.length === 0) {
-    // router.push({ name: "result" });
-    alert("游戏结束，平民胜利！");
-  } else if (unEliminatedCivilianIndexList.value.length === 0) {
-    // router.push({ name: "result" });
-    alert("游戏结束，卧底胜利！");
+  if (
+    unEliminatedCivilianIndexList.value.length === 0 ||
+    unEliminatedSpyIndexList.value.length === 0
+  ) {
+    if (unEliminatedSpyIndexList.value.length === 0) {
+      // 平民胜利
+      game.result.win = "civilian";
+    } else if (unEliminatedCivilianIndexList.value.length === 0) {
+      // 卧底胜利
+      game.result.win = "spy";
+    }
+    game.result.gameWords = gameWords.value.map((item, index) => {
+      return {
+        ...item,
+        face: getRandomFace(index),
+        id: index,
+      };
+    });
+    router.push({ name: "result" });
   }
 };
 
@@ -272,7 +276,7 @@ onMounted(() => {
   @apply px-6;
 }
 
-.words-text {
+.stroke-text {
   --font-color: rgb(238, 223, 255);
   --stroke-color: rgb(102, 57, 220);
 }

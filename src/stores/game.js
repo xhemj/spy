@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+// import { GameWord } from "../utils";
 
 export const useGameStore = defineStore("game", {
   state: () => {
@@ -54,6 +55,17 @@ export const useGameStore = defineStore("game", {
        * @type {boolean}
        */
       isDebugMode: false,
+      /**
+       * 游戏结局
+       * @type {{
+       *  win: "civilian" | "spy",
+       *  gameWords: GameWord[]
+       *  }}
+       */
+      result: {
+        win: "civilian",
+        gameWords: [],
+      },
     };
   },
   actions: {
@@ -70,6 +82,10 @@ export const useGameStore = defineStore("game", {
       this.isStartGame = false;
       this.isCustomWordMode = false;
       this.isDebugMode = false;
+      this.result = {
+        win: "civilian",
+        gameWords: [],
+      };
     },
   },
 });

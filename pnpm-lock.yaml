@@ -3,7 +3,6 @@ lockfileVersion: 5.4
 specifiers:
   '@iconify-icons/material-symbols': ^1.2.25
   '@iconify/vue': ^4.0.2
-  '@nanogiants/vue3-longpress': ^1.0.8
   '@tailwindcss/line-clamp': ^0.4.2
   '@vitejs/plugin-legacy': ^3.0.1
   '@vitejs/plugin-vue': ^4.0.0
@@ -26,12 +25,10 @@ specifiers:
   vue: ^3.2.45
   vue-i18n: 9.2.2
   vue-router: ^4.1.6
-  vue3-directive-long-press: ^1.1.0
 
 dependencies:
   '@iconify-icons/material-symbols': 1.2.25
   '@iconify/vue': 4.0.2_vue@3.2.45
-  '@nanogiants/vue3-longpress': 1.0.8
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.4
   '@vueuse/components': 9.12.0_vue@3.2.45
   '@vueuse/core': 9.12.0_vue@3.2.45
@@ -42,7 +39,6 @@ dependencies:
   vue: 3.2.45
   vue-i18n: 9.2.2_vue@3.2.45
   vue-router: 4.1.6_vue@3.2.45
-  vue3-directive-long-press: 1.1.0
 
 devDependencies:
   '@vitejs/plugin-legacy': 3.0.1_terser@5.16.1+vite@4.0.4
@@ -422,10 +418,6 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
-
-  /@nanogiants/vue3-longpress/1.0.8:
-    resolution: {integrity: sha512-yrqqhrjMKJ/18A+Iq+68E1C1ZrzJeA2ya2y16Zba2kr8ktBgIeQpthIBeXl5wG5B8T5LrDnSy0DjsL1VxC0uCA==}
-    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1585,10 +1577,6 @@ packages:
     engines: {node: '>= 0.10'}
     dev: false
 
-  /vanilla-long-press/1.4.0:
-    resolution: {integrity: sha512-wkAhjDEtXbRBQ5sux85yZWRtQCF2P1tbOUa6b78w0BRrCNZXgm3igGH+4aJCnFa+qKMX+ASz9/QIBZJp0HIj1A==}
-    dev: false
-
   /vite/4.0.4_terser@5.16.1:
     resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -1667,12 +1655,6 @@ packages:
       '@vue/runtime-dom': 3.2.45
       '@vue/server-renderer': 3.2.45_vue@3.2.45
       '@vue/shared': 3.2.45
-
-  /vue3-directive-long-press/1.1.0:
-    resolution: {integrity: sha512-fSZfZHF8RAkkFAc0Fdi8iPH9YIBFkDSnWyES7O0CxI+Lbj7XxL0tDnki3qgD17IghUdvzDgsnPjTB1EHRnTeYg==}
-    dependencies:
-      vanilla-long-press: 1.4.0
-    dev: false
 
   /webpack-sources/3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
