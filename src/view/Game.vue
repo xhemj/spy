@@ -69,8 +69,8 @@
             <div
               class="game-btn btn-small btn-review mt-1 w-fit mx-auto text-base text-white"
               :class="{
-                visible: isGameStart,
-                invisible: !isGameStart,
+                block: isGameStart,
+                '!hidden': !isGameStart,
                 disabled: item.isViewed && item.isReviewed,
               }"
               @click="showCardModal(item, index)"

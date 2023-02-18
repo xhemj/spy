@@ -1,6 +1,6 @@
 <template>
   <div class="Main">
-    <div class="py-8 px-4">
+    <div class="py-6 px-4">
       <img class="w-full h-auto" :src="bannerImg" />
     </div>
     <ResultCard>
