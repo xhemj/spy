@@ -6,49 +6,32 @@
           isGameStart ? "游戏开始，长按投票出局" : "一人选择一张牌，不许偷看哦~"
         }}
       </h3>
-      <router-link
-        :to="{ name: 'setting' }"
-        class="game-btn btn-small w-fit text-base"
-      >
+      <router-link :to="{ name: 'setting' }" class="game-btn btn-small w-fit text-base">
         重新开始
       </router-link>
     </div>
     <!-- 游戏区 -->
     <div v-if="gameWords.length" class="flex flex-row flex-wrap w-full my-6">
-      <div
-        v-for="(item, index) in gameWords"
-        :key="`${index}-${item.word}`"
-        class="game-card w-1/2 p-3 cursor-pointer relative"
-        :class="{
-          'pointer-events-none game-eliminated': item.isEliminated,
-        }"
-        @click="
-          () => {
-            if (!item.isViewed) {
-              showCardModal(item, index);
-            }
+      <div v-for="(item, index) in gameWords" :key="`${index}-${item.word}`"
+        class="game-card w-1/2 p-3 cursor-pointer relative" :class="{
+              'pointer-events-none game-eliminated': item.isEliminated,
+            }" @click="() => {
+          if (!item.isViewed) {
+            showCardModal(item, index);
           }
-        "
-        v-on-long-press="[
+        }
+        " v-on-long-press="[
           () => {
             if (isGameStart) {
               eliminate(item, index);
             }
           },
           { delay: 500 },
-        ]"
-      >
-        <div
-          class="absolute top-3 bottom-3 left-3 right-3 w-auto h-auto flex justify-center items-center"
-        >
+        ]">
+        <div class="absolute top-3 bottom-3 left-3 right-3 w-auto h-auto flex justify-center items-center">
           <!-- 未查看 -->
-          <div
-            v-if="!item.isViewed"
-            class="absolute text-4xl font-bold text-white w-full text-center"
-          >
-            <div
-              class="stroke-text stroke select-none font-sans w-[1em] mx-auto"
-            >
+          <div v-if="!item.isViewed" class="absolute text-4xl font-bold text-white w-full text-center">
+            <div class="stroke-text stroke select-none font-sans w-[1em] mx-auto">
               {{ index + 1 }} 号
             </div>
             <!-- 调试专用 -->
@@ -58,52 +41,35 @@
           </div>
           <!-- 已查看 -->
           <div v-else class="absolute text-black w-full text-center">
-            <img
-              :key="`${index}-${item.word}`"
-              class="words-face !h-20 !w-20"
-              :src="getRandomFace(index)"
-            />
+            <!-- 卡片任务头像 -->
+            <!-- <img :key="`${index}-${item.word}`" class="words-face !h-20 !w-20" :src="getRandomFace(index)" /> -->
+            <div :key="`${index}-${item.word}`" class="words-face !h-20 !w-20 bg-cover bg-center" :style="{
+                backgroundImage: `url(${getRandomFace(index)})`,
+              }" />
             <div class="text-lg mt-0 text-center">
               {{ index + 1 + "号" }}
             </div>
-            <div
-              class="game-btn btn-small btn-review mt-1 w-fit mx-auto text-base text-white"
-              :class="{
-                block: isGameStart,
-                '!hidden': !isGameStart,
-                disabled: item.isViewed && item.isReviewed,
-              }"
-              @click="showCardModal(item, index)"
-            >
+            <div class="game-btn btn-small btn-review mt-1 w-fit mx-auto text-base text-white" :class="{
+              block: isGameStart,
+              '!hidden': !isGameStart,
+              disabled: (item.isViewed && item.isReviewed) || item.isEliminated,
+            }" @click="showCardModal(item, index)">
               忘词
             </div>
           </div>
         </div>
-        <img
-          class="w-full h-auto"
-          :src="
-            item.isViewed
-              ? 'https://staticoss.xhemj.work/spy.xhemj.com/card-viewed.png'
-              : 'https://staticoss.xhemj.work/spy.xhemj.com/card.png'
-          "
-        />
+        <img class="w-full h-auto" :src="item.isViewed
+            ? 'https://staticoss.xhemj.work/spy.xhemj.com/card-viewed.png'
+            : 'https://staticoss.xhemj.work/spy.xhemj.com/card.png'
+          " />
       </div>
     </div>
     <!-- 弹出框 -->
-    <input
-      ref="gameModalRef"
-      type="checkbox"
-      :id="gameModalId"
-      class="modal-toggle"
-    />
+    <input ref="gameModalRef" type="checkbox" :id="gameModalId" class="modal-toggle" />
     <div class="modal flex flex-col justify-center items-center">
       <div class="words-modal modal-box relative">
         <div class="w-full mt-2">
-          <img
-            :key="`${currentViewId}-${currentViewText}`"
-            class="words-face"
-            :src="getRandomFace(currentViewId)"
-          />
+          <img :key="`${currentViewId}-${currentViewText}`" class="words-face" :src="getRandomFace(currentViewId)" />
           <div class="text-base mt-0 mb-5 text-center">
             {{ currentViewId + 1 + "号" }}
           </div>
@@ -116,17 +82,13 @@
         </p>
       </div>
       <div class="w-full mt-8 text-center">
-        <div
-          class="game-btn mx-auto"
-          @click="
-            () => {
-              if (gameModalRef) {
-                onAfterCloseModal();
-                gameModalRef.checked = false;
-              }
-            }
-          "
-        >
+        <div class="game-btn mx-auto" @click="() => {
+          if (gameModalRef) {
+            onAfterCloseModal();
+            gameModalRef.checked = false;
+          }
+        }
+          ">
           我记下了
         </div>
       </div>
@@ -158,7 +120,7 @@ const unEliminatedCivilianIndexList: Ref<number[]> = ref([]);
 const currentViewId = ref(0);
 const currentViewText = ref("");
 
-let onAfterCloseModal: any = () => {};
+let onAfterCloseModal: any = () => { };
 
 const isGameStart = computed(() => {
   return gameWords.value.length > 0 && unViewedWords.value.length === 0;
@@ -175,7 +137,8 @@ const showCardModal = (item: GameWord, index) => {
     onAfterCloseModal = () => {
       unViewedWords.value = unViewedWords.value.filter((i) => i !== index);
       if (gameWords.value[index].isViewed) {
-        gameWords.value[index].isReviewed = true;
+        // 不再限制重复查看次数
+        // gameWords.value[index].isReviewed = true;
       } else {
         gameWords.value[index].isViewed = true;
       }
@@ -262,6 +225,10 @@ onMounted(() => {
   if (!game.isStartGame) {
     router.push({ name: "setting", query: route.query });
   }
+  // 禁止网页右键、长按
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
+  document.addEventListener("touchstart", (e) => e.preventDefault());
+  document.addEventListener("selectstart", (e) => e.preventDefault());
   init();
 });
 </script>

@@ -1,9 +1,14 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-const Home = () => import("./view/Home.vue");
-const Setting = () => import("./view/Setting.vue");
-const Game = () => import("./view/Game.vue");
-const Result = () => import("./view/Result.vue");
+// const Home = () => import("./view/Home.vue");
+// const Setting = () => import("./view/Setting.vue");
+// const Game = () => import("./view/Game.vue");
+// const Result = () => import("./view/Result.vue");
+
+import Home from "./view/Home.vue";
+import Setting from "./view/Setting.vue";
+import Game from "./view/Game.vue";
+import Result from "./view/Result.vue";
 
 const routes = [
   {

@@ -12,7 +12,7 @@
       <div class="w-full mt-8 text-center">
         <router-link
           :to="{ name: 'setting', query: route.query }"
-          class="game-btn mx-auto"
+          class="game-btn mx-auto a--click--CreateGame"
         >
           创建游戏
         </router-link>
