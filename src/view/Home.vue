@@ -18,6 +18,29 @@
         </router-link>
       </div>
     </div>
+    <div class="absolute bottom-2 left-0 right-0">
+      <div class="w-full text-center text-xs text-white">
+        <p>
+          <span>谁是卧底网页版 </span>
+          <span class="border-b border-dashed border-white">{{
+            new Date(now).toLocaleDateString()
+          }}</span>
+          <span> - </span>
+          <span class="border-b border-dashed border-white">{{
+            commitSha
+          }}</span>
+        </p>
+        <p>
+          改编于小米应用商店软件<a
+            href="https://app.mi.com/details?id=com.moguplan.main"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white underline"
+            >谁是卧底</a
+          >，仅供学习交流使用
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,6 +49,10 @@ import { useRoute } from "vue-router";
 import Header from "../components/Header.vue";
 
 const route = useRoute();
+// @ts-ignore
+const commitSha = __COMMIT_HASH__;
+// @ts-ignore
+const now = __BUILD_DATE__;
 </script>
 
 <style scoped></style>
