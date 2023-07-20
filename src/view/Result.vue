@@ -55,17 +55,29 @@
         </div>
       </template>
     </ResultCard>
-    <div class="w-full mt-8 text-center">
+    <div class="w-full mt-8 text-center space-y-2">
       <span
         class="game-btn mx-auto"
         @click="
           () => {
             game.reset();
-            router.push({ name: 'setting' });
+            game.handleStartGame();
           }
         "
       >
         再来一局
+      </span>
+      <span
+        class="game-btn mx-auto btn-theme-blue"
+        @click="
+          () => {
+            router.push({
+              name: 'home',
+            });
+          }
+        "
+      >
+        返回首页
       </span>
     </div>
   </div>

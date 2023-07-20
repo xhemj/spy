@@ -182,6 +182,8 @@ const handleStartGame = async () => {
   game.isStartGame = true;
   router.push({ name: "game", query: route.query });
 };
+
+game.handleStartGame = handleStartGame;
 </script>
 
 <style scoped>

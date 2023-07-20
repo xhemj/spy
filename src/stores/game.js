@@ -66,6 +66,11 @@ export const useGameStore = defineStore("game", {
         win: "civilian",
         gameWords: [],
       },
+      /**
+       * 游戏开始
+       * @type {() => void}
+       */
+      handleStartGame: () => {},
     };
   },
   actions: {
@@ -75,13 +80,13 @@ export const useGameStore = defineStore("game", {
     reset() {
       this.civilianWord = "";
       this.undercoverWord = "";
-      this.totalPlayerCount = 4;
-      this.undercoverCount = 1;
-      this.hasBlankPlayer = false;
-      this.isLoadedWordList = false;
+      // this.totalPlayerCount = 4;
+      // this.undercoverCount = 1;
+      // this.hasBlankPlayer = false;
+      // this.isLoadedWordList = false;
       this.isStartGame = false;
-      this.isCustomWordMode = false;
-      this.isDebugMode = false;
+      // this.isCustomWordMode = false;
+      // this.isDebugMode = false;
       this.result = {
         win: "civilian",
         gameWords: [],

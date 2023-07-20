@@ -67,7 +67,7 @@
               {{ index + 1 + "号" }}
             </div>
             <div
-              class="game-btn btn-small btn-review mt-1 w-fit mx-auto text-base text-white"
+              class="game-btn btn-small btn-theme-blue mt-1 w-fit mx-auto text-base text-white"
               :class="{
                 block: isGameStart,
                 '!hidden': !isGameStart,
@@ -304,9 +304,9 @@ onMounted(() => {
   @apply text-sm px-3 py-1;
 }
 
-.game-btn.btn-review {
+:global(.game-btn.btn-theme-blue) {
   background-color: var(--theme-blue);
-  @apply px-6;
+  @apply !px-6;
 }
 
 .stroke-text {
