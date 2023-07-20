@@ -30,7 +30,10 @@ const buildDate = new Date().getTime();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "./",
+  base:
+    process.env.NODE_ENV === "production"
+      ? "https://www.xhemj.work/spy/"
+      : "./",
   define: {
     __COMMIT_HASH__: JSON.stringify(commitHash),
     __BUILD_DATE__: JSON.stringify(buildDate),
