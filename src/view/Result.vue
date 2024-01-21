@@ -113,7 +113,7 @@ const bannerImg = computed(() => {
 const init = () => {
   for (let item of game.result.gameWords) {
     if (item.isSpy) {
-      spyWord.value = item.word;
+      spyWord.value = spyWord.value || item.word;
       spyPlayerList.value.push(item);
     } else {
       civilianWord.value = item.word;
