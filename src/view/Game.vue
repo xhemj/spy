@@ -291,10 +291,7 @@ onMounted(() => {
   if (!game.isStartGame) {
     router.push({ name: "setting", query: route.query });
   }
-  // 禁止网页右键、长按
-  document.addEventListener("contextmenu", (e) => e.preventDefault());
-  document.addEventListener("touchstart", (e) => e.preventDefault());
-  document.addEventListener("selectstart", (e) => e.preventDefault());
+
   init();
 });
 </script>

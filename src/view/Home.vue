@@ -12,7 +12,7 @@
       <div class="w-full mt-8 text-center">
         <router-link
           :to="{ name: 'setting', query: route.query }"
-          class="game-btn mx-auto a--click--CreateGame"
+          class="game-btn mx-auto"
         >
           创建游戏
         </router-link>
@@ -29,15 +29,6 @@
           <span class="border-b border-dashed border-white">{{
             commitSha
           }}</span>
-        </p>
-        <p>
-          改编于小米应用商店软件<a
-            href="https://app.mi.com/details?id=com.moguplan.main"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white underline"
-            >谁是卧底</a
-          >，仅供学习交流使用
         </p>
       </div>
     </div>

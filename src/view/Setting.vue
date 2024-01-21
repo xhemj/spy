@@ -72,12 +72,7 @@
     </div>
     <!-- 开始游戏 -->
     <div class="w-full mt-8 text-center">
-      <span
-        class="game-btn mx-auto a--click--StartGame"
-        @click="handleStartGame"
-      >
-        开始游戏
-      </span>
+      <span class="game-btn mx-auto" @click="handleStartGame"> 开始游戏 </span>
     </div>
 
     <!-- 自定义词语弹窗 -->

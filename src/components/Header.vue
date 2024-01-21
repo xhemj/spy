@@ -7,7 +7,7 @@
         alt="谁是卧底"
       />
     </div>
-    <div class="text-sm text-white">测试版</div>
+    <!-- <div class="text-sm text-white">测试版</div> -->
   </div>
 </template>
 

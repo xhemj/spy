@@ -4,6 +4,10 @@
       <component :is="Component" />
     </transition>
   </router-view>
+  <Teleport to="body">
+    <!-- 背景图片 -->
+    <div id="bg"></div>
+  </Teleport>
 </template>
 
 <script lang="ts" setup>
@@ -17,6 +21,10 @@ const game = useGameStore();
 const transitionName = ref("slide-right");
 
 router.beforeEach((to, from) => {
+  if (!from.meta.level) {
+    transitionName.value = "";
+    return;
+  }
   const fromLevel = from.meta.level || 0;
   const toLevel = to.meta.level || 1;
   if (fromLevel > toLevel) {
@@ -35,6 +43,11 @@ onMounted(() => {
       img.src = item;
     });
   }, 1);
+
+  // 禁止网页右键、长按
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
+  document.addEventListener("touchstart", (e) => e.preventDefault());
+  document.addEventListener("selectstart", (e) => e.preventDefault());
 });
 </script>
 
